@@ -8,21 +8,23 @@ public class Conta {
         this.numero = numero;
         this.saldo = 0.0;
     }
+    private void validarValorPositivo(double valor, String operacao) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("O valor da " + operacao + " deve ser positivo.");
+        }
+    }
 
     public void depositar(double valor) {
-        if (valor <= 0) {
-            throw new IllegalArgumentException("O valor do depósito deve ser positivo.");
-        }
+        validarValorPositivo(valor, "depósito");
         this.saldo += valor;
     }
     public void sacar(double valor) {
-        if (valor <= 0) {
-            throw new IllegalArgumentException("O valor do saque deve ser positivo.");
-        }
-        if (valor > this.saldo) {
-            throw new IllegalStateException("Saldo insuficiente."); 
+        validarValorPositivo(valor, "saque");
+        if (valor > this.saldo){
+        throw new IllegalStateException("Saldo insuficiente");
         }
         this.saldo -= valor;
+        
     }
     
     // Métodos getters
