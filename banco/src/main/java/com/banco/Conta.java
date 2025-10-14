@@ -21,7 +21,7 @@ public class Conta {
     public void sacar(double valor) {
         validarValorPositivo(valor, "saque");
         if (valor > this.saldo){
-        throw new IllegalStateException("Saldo insuficiente");
+        throw new SaldoInsuficienteException("Saldo insuficiente");
         }
         this.saldo -= valor;
         
