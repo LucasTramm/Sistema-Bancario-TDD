@@ -1,75 +1,93 @@
-🏦 Projeto Banco - Sistema de Contas e Transações
-Este projeto Java simula a lógica de negócio básica de um sistema bancário, focado na classe Conta e em um TransacaoService. O projeto utiliza Apache Maven como gerenciador de build e JUnit 5 para testes unitários, com cobertura verificada pelo JaCoCo.
+# 🏦 **Projeto Banco — Sistema de Contas e Transações**
 
-🚀 Requisitos
+Este projeto em **Java** simula a lógica de negócio básica de um **sistema bancário**, com foco nas classes `Conta` e `TransacaoService`.  
+O projeto utiliza:
+
+- 🧱 **Apache Maven** como gerenciador de build  
+- 🧪 **JUnit 5** para testes unitários  
+- 📊 **JaCoCo** para verificação de cobertura de código  
+
+---
+
+## 🚀 **Requisitos**
+
 Para executar e testar o projeto, você precisará ter instalado:
 
-JDK (Java Development Kit): Versão 17 ou superior.
+- ☕ **JDK (Java Development Kit)** — versão **17** ou superior  
+- 🧱 **Apache Maven** — versão **3.x** ou superior  
+- 💻 **IDE (opcional)** — *Apache NetBeans*, *IntelliJ IDEA* ou *Eclipse*
 
-Apache Maven: Versão 3.x ou superior.
+---
 
-IDE (Opcional): Apache NetBeans, IntelliJ IDEA ou Eclipse.
+## ⚙️ **Configuração e Execução**
 
-⚙️ Configuração e Execução
-1. Clonar o Repositório
-Navegue até o diretório onde você deseja salvar o projeto e clone o repositório (se estiver usando Git):
+### 🌀 **1. Clonar o repositório**
 
-Bash
+No terminal, navegue até o diretório onde deseja salvar o projeto e execute:
 
+```bash
 git clone <URL_DO_REPOSITORIO>
 cd banco
-2. Compilar o Projeto
-Execute o comando Maven para baixar as dependências e compilar o código fonte e os testes:
+```
+---
+### 🧩 **2. Compilar o projeto**
 
-Bash
+Execute o comando Maven para baixar as dependências e compilar o código-fonte e os testes:
 
-mvn clean install
-✅ Execução dos Testes e Cobertura (JaCoCo)
-O projeto está configurado para executar todos os testes unitários e, em seguida, gerar o relatório de cobertura de código (Code Coverage) usando o plugin JaCoCo.
+```bash
+mvn clean compile
+```
+---
+✅ **3. Executar testes e verificar cobertura (JaCoCo)**
 
-O build está configurado para falhar se a cobertura de linhas for inferior a 75% (jacoco-check).
+O projeto está configurado para:
 
-Para executar o ciclo completo (testes + geração de relatório + verificação), utilize o goal verify:
+Executar todos os testes unitários
 
-Bash
+Gerar o relatório de cobertura de código
 
+Falhar o build se a cobertura for inferior a 75%
+
+Execute o ciclo completo com:
+
+```bash
 mvn clean verify
-Resultados Esperados
-Sucesso do Build: Se a cobertura de código for igual ou superior a 75%, o Maven exibirá BUILD SUCCESS.
+```
+---
+### **📈 Visualizar o relatório de cobertura (JaCoCo)**
 
-Falha do Build: Se a cobertura for inferior a 75% (conforme sua última tentativa), o Maven exibirá BUILD FAILURE e indicará a métrica que não atingiu o mínimo no goal jacoco-check.
+Após o comando mvn clean verify, o relatório HTML será gerado em:
 
-📈 Visualizar o Relatório JaCoCo
-Após a execução do comando mvn clean verify, o relatório de cobertura em formato HTML é gerado.
-
-O relatório estará disponível no seguinte caminho, dentro da pasta do projeto:
-
+```bash
 target/site/jacoco/index.html
-Para visualizar o relatório:
+```
+🔍 Para visualizar:
 
-Navegue até a pasta target/site/jacoco/.
+1. Navegue até target/site/jacoco/
 
-Abra o arquivo index.html no seu navegador de preferência.
+2. Abra index.html no navegador
+---
+## 💡 **Execução via IDE (NetBeans / IntelliJ / Eclipse)**
 
-O relatório usará cores para indicar o status do código:
+🧭 Abrir o projeto
 
-Verde: Linhas cobertas por testes.
+Vá em File → Open Project
 
-Amarelo: Branches (decisões) parcialmente cobertos.
+Selecione o arquivo pom.xml
 
-Vermelho: Linhas não cobertas (que precisam de testes).
+🧪 Executar testes e cobertura
 
-Execução na IDE (NetBeans)
-Se estiver usando o Apache NetBeans (ou similar):
+Clique com o botão direito no projeto
 
-Abrir o Projeto: Use File → Open Project e selecione o pom.xml.
+Escolha Run Maven → Goals
 
-Executar Testes e Cobertura:
+Digite verify e clique em Run
 
-Clique com o botão direito no projeto, no painel Projects.
+📂 Acessar o relatório
 
-Selecione Run Maven → Goals.
+Na aba Files, vá até:
 
-Clique em Run.
-
-Localizar o Relatório: O relatório HTML pode ser acessado na aba Files → target/site/jacoco/index.html.
+```bash
+target/site/jacoco/index.html
+```
+e abra no navegador.
