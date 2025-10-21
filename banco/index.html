@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Banco TDD - Interface de Testes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8 font-sans">
+
+  <div class="container mx-auto max-w-4xl bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">Painel do Banco</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div id="conta-origem-card" class="bg-gray-50 p-4 rounded-lg border">
+        <h2 class="text-xl font-semibold mb-2">Conta Origem (C1)</h2>
+        <p class="text-2xl font-mono">Saldo: R$ <span id="saldo-origem">0.00</span></p>
+      </div>
+      <div id="conta-destino-card" class="bg-gray-50 p-4 rounded-lg border">
+        <h2 class="text-xl font-semibold mb-2">Conta Destino (C2)</h2>
+        <p class="text-2xl font-mono">Saldo: R$ <span id="saldo-destino">0.00</span></p>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Depósito (Conta Origem)</h3>
+        <div class="flex space-x-2">
+          <input type="number" id="valor-deposito" placeholder="Valor para depositar" class="flex-grow p-2 border rounded">
+          <button id="btn-depositar" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            Depositar
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Saque (Conta Origem)</h3>
+        <div class="flex space-x-2">
+          <input type="number" id="valor-saque" placeholder="Valor para sacar" class="flex-grow p-2 border rounded">
+          <button id="btn-sacar" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+            Sacar
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold mb-2">Transferência (Origem para Destino)</h3>
+        <div class="flex space-x-2">
+          <input type="number" id="valor-transferencia" placeholder="Valor para transferir" class="flex-grow p-2 border rounded">
+          <button id="btn-transferir" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+            Transferir
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold mb-4">Log de Execução</h2>
+      <div id="test-log" class="bg-gray-900 text-white font-mono text-sm p-4 rounded-lg h-48 overflow-y-auto">
+        <p>&gt; Aguardando ações...</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Saldos simulados
+    let saldoOrigem = 0.00;
+    let saldoDestino = 0.00;
+
+    const atualizarSaldos = () => {
+      document.getElementById('saldo-origem').innerText = saldoOrigem.toFixed(2);
+      document.getElementById('saldo-destino').innerText = saldoDestino.toFixed(2);
+    };
+
+    const log = (msg) => {
+      const logEl = document.getElementById('test-log');
+      logEl.innerHTML += `<p>&gt; ${msg}</p>`;
+      logEl.scrollTop = logEl.scrollHeight; // rola o log
+    };
+
+    document.getElementById('btn-depositar').addEventListener('click', () => {
+      const valor = parseFloat(document.getElementById('valor-deposito').value);
+      if (!valor || valor <= 0) return log('Valor inválido para depósito.');
+      saldoOrigem += valor;
+      atualizarSaldos();
+      log(`Depósito de R$ ${valor.toFixed(2)} realizado.`);
+      document.getElementById('valor-deposito').value = '';
+    });
+
+    document.getElementById('btn-sacar').addEventListener('click', () => {
+      const valor = parseFloat(document.getElementById('valor-saque').value);
+      if (!valor || valor <= 0) return log('Valor inválido para saque.');
+      if (valor > saldoOrigem) return log('Erro: saldo insuficiente.');
+      saldoOrigem -= valor;
+      atualizarSaldos();
+      log(`Saque de R$ ${valor.toFixed(2)} realizado.`);
+      document.getElementById('valor-saque').value = '';
+    });
+
+    document.getElementById('btn-transferir').addEventListener('click', () => {
+      const valor = parseFloat(document.getElementById('valor-transferencia').value);
+      if (!valor || valor <= 0) return log('Valor inválido para transferência.');
+      if (valor > saldoOrigem) return log('Erro: saldo insuficiente.');
+      saldoOrigem -= valor;
+      saldoDestino += valor;
+      atualizarSaldos();
+      log(`Transferência de R$ ${valor.toFixed(2)} realizada.`);
+      document.getElementById('valor-transferencia').value = '';
+    });
+
+    // Atualiza a UI inicial
+    atualizarSaldos();
+  </script>
+</body>
+</html>

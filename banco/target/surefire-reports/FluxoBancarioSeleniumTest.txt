@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: FluxoBancarioE2ETest
+Test set: FluxoBancarioSeleniumTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in FluxoBancarioE2ETest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 19.09 s -- in FluxoBancarioSeleniumTest

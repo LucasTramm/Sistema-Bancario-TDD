@@ -1,3 +1,4 @@
 com\banco\Conta.class
 com\banco\SaldoInsuficienteException.class
+com\banco\BancoControle.class
 com\banco\TransacaoService.class

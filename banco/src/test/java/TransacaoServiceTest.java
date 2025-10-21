@@ -28,57 +28,53 @@ public class TransacaoServiceTest {
 
     // Cenário 1: Sucesso
     
-    @Test
-    void deveTransferirValorComSucessoEntreDuasContas() { // Teste 1
+ @Test
+    void deveTransferirValorComSucessoEntreDuasContas() {
         contaOrigem.depositar(300.0);
         service.transferir(contaOrigem, contaDestino, 100.0);
-
         assertEquals(200.0, contaOrigem.getSaldo());
         assertEquals(100.0, contaDestino.getSaldo());
     }
-    
+
     @Test
-    void deveTransferirValorMaximoComSucesso() { // Teste 2
+    void deveTransferirValorMaximoComSucesso() {
         contaOrigem.depositar(500.0);
         service.transferir(contaOrigem, contaDestino, 500.0);
-
         assertEquals(0.0, contaOrigem.getSaldo());
         assertEquals(500.0, contaDestino.getSaldo());
     }
 
     @Test
-    void deveTransferirValorPequenoComSucesso() { // Teste 3
+    void deveTransferirValorPequenoComSucesso() {
         contaOrigem.depositar(1.0);
         service.transferir(contaOrigem, contaDestino, 0.50);
-
         assertEquals(0.50, contaOrigem.getSaldo(), 0.001);
         assertEquals(0.50, contaDestino.getSaldo(), 0.001);
     }
 
     // Cenário 2: Falha
 
-    @Test
-    void naoDeveTransferirComSaldoInsuficiente() { // Teste 4
+     void naoDeveTransferirComSaldoInsuficiente() {
         contaOrigem.depositar(100.0);
-        
-        // Verifica se a exceção é lançada
-        assertThrows(SaldoInsuficienteException.class, () -> {
-            service.transferir(contaOrigem, contaDestino, 150.0);
-        });
-        // Garante que a transação não foi completada
-        assertEquals(100.0, contaOrigem.getSaldo(), "Saldo da origem deve ser mantido.");
-        assertEquals(0.0, contaDestino.getSaldo(), "Saldo do destino deve ser zero.");
+        assertThrows(SaldoInsuficienteException.class,
+                () -> service.transferir(contaOrigem, contaDestino, 150.0));
+        assertEquals(100.0, contaOrigem.getSaldo());
+        assertEquals(0.0, contaDestino.getSaldo());
     }
-    
-    @Test
-    void naoDeveTransferirComValorNegativo() { // Teste 5
-        contaOrigem.depositar(100.0);
-        
-        assertThrows(IllegalArgumentException.class, () -> {
-            service.transferir(contaOrigem, contaDestino, -10.0);
-        });
 
-        assertEquals(100.0, contaOrigem.getSaldo(), "Saldo da origem deve ser mantido.");
-        assertEquals(0.0, contaDestino.getSaldo(), "Saldo do destino deve ser zero.");
+    @Test
+    void naoDeveTransferirComValorNegativo() {
+        contaOrigem.depositar(100.0);
+        assertThrows(IllegalArgumentException.class,
+                () -> service.transferir(contaOrigem, contaDestino, -10.0));
+        assertEquals(100.0, contaOrigem.getSaldo());
+        assertEquals(0.0, contaDestino.getSaldo());
+    }
+
+    @Test
+    void naoDeveTransferirComContasNulas() {
+        contaOrigem.depositar(100.0);
+        assertThrows(IllegalArgumentException.class, () -> service.transferir(null, contaDestino, 50.0));
+        assertThrows(IllegalArgumentException.class, () -> service.transferir(contaOrigem, null, 50.0));
     }
 }
