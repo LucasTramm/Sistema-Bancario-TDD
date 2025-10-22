@@ -67,7 +67,7 @@ target/site/jacoco/index.html
 
 2. Abra index.html no navegador
 ---
-## 💡 **Execução via IDE (NetBeans / IntelliJ / Eclipse)**
+## 💡 **Execução via IDE (NetBeans)**
 
 🧭 Abrir o projeto
 
@@ -81,7 +81,7 @@ Clique com o botão direito no projeto
 
 Escolha Run Maven → Goals
 
-Digite verify e clique em Run
+Digite em Goals verify e clique em OK
 
 📂 Acessar o relatório
 
