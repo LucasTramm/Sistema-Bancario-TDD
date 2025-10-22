@@ -64,12 +64,11 @@ public class FluxoBancarioSeleniumTest {
                 String.format(Locale.US, "%.2f", contaDestino.getSaldo()));
     }
 
-    // 👉 Digitação mais devagar e realista
     private void digitarComoHumano(WebElement element, String texto) {
         for (char c : texto.toCharArray()) {
             element.sendKeys(String.valueOf(c));
 
-            // pausa entre 400ms e 800ms — bem devagar
+            // pausa entre 400ms e 800ms para simular digitação humana
             try {
                 Thread.sleep(400 + (int) (Math.random() * 400));
             } catch (InterruptedException e) {
@@ -159,7 +158,7 @@ public class FluxoBancarioSeleniumTest {
 
      static void tearDownAll() {
         if (driver != null) {
-            driver.quit(); // Fecha o Chrome
+            driver.quit(); 
         }
     }
 }
